@@ -1,0 +1,964 @@
+
+<html>
+	<head>
+<link href="http://www.alanysgazapo.com/usablenet/css/base.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://www.alanysgazapo.com/usablenet/css/bprint.css" rel="stylesheet" type="text/css" media="print" />
+<script type="text/javascript" src="http://pr0digy.com/sandbox/mootools/slide-effect/js/mootools.v1.11.js"></script> 
+
+<style type="text/css" media="screen">
+body{ 
+background-image:url('http://fc04.deviantart.net/fs7/i/2005/207/6/1/Evil_Monkey_Desktop_by_Antonotron.png');
+background-repeat:no-repeat;
+background-position:right bottom;
+
+text-align: left; font: 12px/1.4em Arial, sans-serif; padding: 0 0 30px 0; 
+}
+th, td { font:12px/1.4em Verdana,sans-serif; }
+#container { position:relative; min-width:55em; max-width:100em; }
+#homepage #container { max-width:100em; }
+#columnwrap { background:#000000; padding-bottom:10px; }
+ul.simple, ul.simple li{ list-style:  none outside; padding: 0; }
+ul.simple li p, ul.simple li h4{ padding: 10px 10px; }
+ul.side li p, ul.side li h4{ padding: 3px 3px; }
+footer {background-color: #000000;}
+a:link {color:#F87217;}      /* unvisited link */
+a:visited {color:#FFFFFF;}  /* visited link */
+a:hover {color:#6D7B8D;}  /* mouse over link */
+  </style>
+
+
+<title>Alanys Projects</title>	
+
+	<script type="text/javascript"> 
+	//<![CDATA[
+	
+		var Site = {
+	
+			start: function(){
+				if($('vertical')) Site.vertical();
+				if($('horizontal')) Site.horizontal();
+				if($('accordion')) Site.accordion();
+			},
+			
+			vertical: function(){
+				var list = $$('#vertical li div.collapse');
+				var headings = $$('#vertical li h3');
+				var collapsibles = new Array();
+				
+				headings.each( function(heading, i) {
+ 
+					var collapsible = new Fx.Slide(list[i], { 
+						duration: 500, 
+						transition: Fx.Transitions.linear,
+						onComplete: function(request){ 
+							var open = request.getStyle('margin-top').toInt();
+							if(open >= 0) new Fx.Scroll(window).toElement(headings[i]);
+						}
+					});
+					
+					collapsibles[i] = collapsible;
+					
+					heading.onclick = function(){
+						var span = $E('span', heading);
+ 
+						if(span){
+							var newHTML = span.innerHTML == '+' ? '-' : '+';
+							span.setHTML(newHTML);
+						}
+						
+						collapsible.toggle();
+						return false;
+					}
+					
+					collapsible.hide();
+					
+				});
+				
+				$('collapse-all').onclick = function(){
+					headings.each( function(heading, i) {
+						collapsibles[i].hide();
+						var span = $E('span', heading);
+						if(span) span.setHTML('+');
+					});
+					return false;
+				}
+				
+				$('expand-all').onclick = function(){
+					headings.each( function(heading, i) {
+						collapsibles[i].show();
+						var span = $E('span', heading);
+						if(span) span.setHTML('-');
+					});
+					return false;
+				}
+				
+			},
+			
+			horizontal: function(){
+				var list = $$('#horizontal li div.collapse');
+				var headings = $$('#horizontal li h3');
+				var collapsibles = new Array();
+				
+				headings.each( function(heading, i) {
+ 
+					var collapsible = new Fx.Slide(list[i], { 
+						duration: 500, 
+						transition: Fx.Transitions.linear
+					});
+					
+					collapsibles[i] = collapsible;
+					
+					heading.onclick = function(){
+						var span = $E('span', heading);
+ 
+						if(span){
+							var newHTML = span.innerHTML == '+' ? '-' : '+';
+							span.setHTML(newHTML);
+						}
+						
+						collapsible.toggle('horizontal');
+						return false;
+					}
+					
+				});
+				
+				$('slideout-all').onclick = function(){
+					headings.each( function(heading, i) {
+						collapsibles[i].hide('horizontal');
+						var span = $E('span', heading);
+						if(span) span.setHTML('+');
+					});
+					return false;
+				}
+				
+				$('slidein-all').onclick = function(){
+					headings.each( function(heading, i) {
+						collapsibles[i].show('horizontal');
+						var span = $E('span', heading);
+						if(span) span.setHTML('-');
+					});
+					return false;
+				}
+				
+			},
+			
+			accordion: function(){
+				var list = $$('#accordion li div.collapse');
+				var headings = $$('#accordion li h3');
+				var collapsibles = new Array();
+				var spans = new Array();
+				
+				headings.each( function(heading, i) {
+ 
+					var collapsible = new Fx.Slide(list[i], { 
+						duration: 500, 
+						transition: Fx.Transitions.quadIn
+					});
+					
+					collapsibles[i] = collapsible;
+					spans[i] = $E('span', heading);
+					
+					heading.onclick = function(){
+						var span = $E('span', heading);
+ 
+						if(span){
+							var newHTML = span.innerHTML == '+' ? '-' : '+';
+							span.setHTML(newHTML);
+						}
+						
+						for(var j = 0; j < collapsibles.length; j++){
+							if(j!=i) {
+								collapsibles[j].slideOut();
+								if(spans[j]) spans[j].setHTML('+');
+							}
+						}
+						
+						collapsible.toggle();
+						
+						return false;
+					}
+					
+					collapsible.hide();
+					
+				});
+			}
+		};
+		window.addEvent('domready', Site.start);
+	//]]>	
+	</script> 
+</head> 
+
+<h1 style="padding-left:20px; color:#FFFFFF;">
+
+ScrollMotion | agazapo 
+
+</h1>
+
+
+
+<div id="columnwrap"><div id="content-main">
+
+<div class="heading"> <a id="expand-all" href="#" title="Expand all">expand all</a> | <a id="collapse-all" href="#"
+title="Collapse all">collapse all</a>
+</div>
+
+<!--GOOGLE CALENDAR--> 
+
+<!--
+<ul id="vertical" class="simple">
+	<li>
+	<h3 align="right" style="font-size:12px"> <a name="1" href="#1"><img style="float:right; padding:5px" width="30px"
+	heigh="30px" src="http://www.iconspedia.com/uploads/755652287549775328.png"/></a>
+	<div class="collapse"> <div class="collapse-container"> <iframe src="http://www.google.com/calendar/embed?src=agazapo%40scrollmotion.com&ctz=America/New_York" style="border-width:0
+	"width="800" height="600" frameborder="0" scrolling="no"></iframe> </div> </div> 
+	</li> 
+	
+</ul>
+-->
+
+<ul id="vertical" class="simple">
+
+<h4> SM Projects</h4>
+
+<!--ScrollMotion -->
+
+<!--SEP-->
+		<li>
+			<h3> <a name="1" href="#1">ScrollMotion Enterprise Platform (SEP) </a> <span>+</span> </h3>
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+
+<br/><br/><strong>2016 SEP</strong><br/><br/>
+
+				
+				1.<a target="_blank" href="https://jira.scrollmotion.com/browse/IOS-1314"/>Push Notifications-Analytics </a>  <br />
+				
+				2. <a target="_blank" href="https://sites.google.com/a/gene.com/brand-site-standards/home/omniture"/>GNE Analytics Standards</a> <br />
+				3.<a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/customer-onboarding/support/tickets/new"/>Assembla Space for new ticket</a> <br />
+-->
+
+
+
+
+<br/><br/><strong>2013 SEP</strong><br/><br/>
+
+				
+				1.<a target="_blank" href="https://services.scrollmotion.com"/>2013 SEP Client App - Testing Instructions</a> agazapo@scrollmotion.com /  S0nic131 <br />
+				2. <a target="_blank" href="http://deploy.scrollmotion.com/sep/qarelease"/>2013 SEP Client App - Download</a> sep / Scr0ll2012<br />
+				3.<a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/customer-onboarding/support/tickets/new"/>Assembla Space for new ticket</a> <br />
+
+
+
+<br/><br/><strong>2012 SEP</strong><br/><br/>
+				3. <a target="_blank" href="http://deploy.scrollmotion.com/scrollmotion/"/>2012 SEP Client App - Download</a> scrollmotion /  scrollpass <br />
+				3. <a target="_blank" href="http://services-appledemo.smint.us/iceborg/pkg/"/>2012 SEP Client App - CMS</a> agazapo@scrollmotion.com / s0nic131 <br />
+
+				</p> 
+				
+			</div> 
+			</div> 
+
+
+		</li>
+
+		<li>
+			<h3> <a name="1" href="#1">BRAVO</a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				<br /> <br />
+				
+				1. <a target="_blank" href="https://bravo.scrollmotion.com/"/> Workcloud </a> design.bravo@company.com / Br4vouser <br />
+
+				
+				</div> 
+			</div> 
+		</li> 
+
+
+
+
+
+		<li>
+			<h3> <a name="1" href="#1">SM INTERNAL </a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+
+				1. 	<a target="_blank" href="http://deploy.scrollmotion.com/reference/"/> Internal Apps OTA</a>  - scrollmotion / Scr0ll2013<br />
+				2. <a target="_blank" href="http://deploy.scrollmotion.com/qa/"/> Internal Apps QA</a>  - qa / qa-123<br />
+				3. <a target="_blank" href="http://deploy.scrollmotion.com/sep/"/> 2012 SEP download site</a> - sep / Scr0ll2012 <br /> 
+				4. <a target="_blank" href="http://deploy.scrollmotion.com/smsales/"/> Internal Sales App </a> - smsales / Scr0ll<br />
+				5. <a target="_blank" href="http://info.scrollmotion.com/scrollmotion-company-resources"/> ScrollMotion Resources </a><br /> 
+				
+				  
+
+
+				
+
+				</p>
+				
+				</div> 
+			</div> 
+		</li> 
+
+
+
+
+
+
+<h4> GNE Projects</h4>
+
+
+<!--iDetail-->
+
+		<li>
+			<h3> <a name="1" href="#1">iDETAIL </a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				bundle id = com.gene.mdetailingshells / com.gene.mdetailingshellsqa
+				<br /><br />
+				
+				
+				1. <a target="_blank" href="http://genentech-dev.smint.us/admin "/>iDetail - Dev Admin</a> | scrollmotion2011 / scrollmotion2011
+
+<br />
+				2. <a target="_blank" href="http://genentech-qa.smint.us/admin/genentech/"/> iDetail - QA Admin</a> | agazapo / gazap0	<br />
+				3. <a target="_blank" href="http://genentech-prod-cluster.smint.us/admin/"/> iDetail - PROD Admin</a> | scrollmotion2011 / j4ggW#y	<br />
+
+				4. <a target="_blank" href="http://deploy.scrollmotion.com/gene/"/>iDetail - Internal</a> | 
+genentech / Scroll2011
+
+<br/>
+				5. <a target="_blank" href="https://genentechota.scrollmotion.com/qa-idetail"/>iDetail - GenentechOTA</a> | 
+smqa / qaID---... (Note this is 3 dashes and 3 periods)
+
+<br />
+				6. <a target="_blank" href="http://appstore.gene.com"/>iDetail - AppStore</a> | 
+vonbecku / Welcome7
+
+<br />
+				7. <a target="_blank" href="https://sites.google.com/a/gene.com/idetail/home"/>iDetail Semphonic site </a> |  <br />
+			
+				8. <a target="_blank" href="https://b2bqa.gene.com/sfaiphone"/>Test QA bpters </a> |<br />
+				
+				8.2 <a target="_blank" href="https://b2bqa.gene.com/sfdcredirect"/>Test QA bpters  v2</a> |<br />
+
+				
+				9. <a target="_blank" href="https://sites.google.com/a/gene.com/idetail-functionality-review-committee/home"/>iFDRC gSite </a> |  <br />
+				
+				10. <a target="_blank" href="https://sites.google.com/a/gene.com/idetail-e-mail-project/"/>iDetail Email gSite </a> |  <br />
+
+				
+
+				11. <a target="_blank" href="https://ramp.gene.com/"/>RAMP Site </a> |  gazapoa / <br />
+				12. <a target="_blank" href="https://cs3.salesforce.com/home/home.jsp"/>SalesForce </a> |  agazapo@scrollmotion.com.idetail / s0nic131!<br />
+
+				13. <a target="_blank" href="https://sites.google.com/a/gene.com/genentech-idetail-governance/"/> Governance/Roadmap  gWiz Site </a> <br />
+
+				14. <a target="_blank" href="https://preflight.scrollmotion.com/content/"/> Preflights.scrollmotion.com </a> alanys.gazapo@scrollmotion.com | Changeme1
+
+
+				</div> 
+			</div> 
+		</li> 
+
+
+
+
+<!--iTrain-->
+
+		<li>
+			<h3> <a name="1" href="#1">iTRAIN </a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				bundleid =  com.gene.itrainshell / com.gene.itrainshellqa
+				<br /> <br />
+				
+				1. <a target="_blank" href="http://genentech-qa.smint.us/admin/genentech/"/> iTrain - QA Admin</a> | agazapo / gazap0	<br />
+				2. <a target="_blank" href="http://deploy.scrollmotion.com/gene/"/>iTrain - Internal</a> | 
+genentech / Scroll2011
+
+<br/>
+
+				3. <a target="_blank" href="https://genentechota.scrollmotion.com/qa-itrain"/>iTrain - Genentech OTA </a> | 
+itrain / 1train--- (3 dashes)
+
+<br />
+				
+				
+				
+				</div> 
+			</div> 
+		</li> 
+
+
+
+
+
+
+
+<!--iScience-->
+
+		<li>
+			<h3> <a name="1" href="#1">iSCIENCE</a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				 bundle id = com.gene.iscienceshell / com.gene.iscienceshellqa
+
+				
+				
+				<br /> <br />
+				
+				
+				1. <a target="_blank" href="http://genentech-qa.smint.us/admin/genentech/"/> iScience - QA Admin</a> | agazapo / gazap0	<br />
+				2. <a target="_blank" href="http://deploy.scrollmotion.com/gene/"/>iDetail - Internal</a> | 
+genentech / Scroll2011
+
+<br/>
+
+				3. <a target="_blank" href="https://genentechota.scrollmotion.com/qa-iscience"/>iScience Genentech OTA </a> | 
+iscience / 1scienc3--- (3 dashes)
+
+<br />				
+				
+				4. <a target="_blank" href="http://iscience.scrollmotion.com"/> iScience SEP</a> | alanys.gazapo@scrollmotion.com / Changeme1	<br />
+
+	
+				
+				</div> 
+			</div> 
+		</li> 
+
+
+
+
+
+
+<!--GeneCube-->
+
+		<li>
+			<h3> <a name="1" href="#1">GENECUBE</a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+			<br />
+				
+				<a target="_blank" href="https://idetail.scrollmotion.com"/> Genecube QA </a> genecube.qa@gene.com / Gencube8  <br />
+				<a target="_blank" href="https://idetail.scrollmotion.com"/> Genecube PD </a> genecube.pd@gene.com / Gencube8 </a> <br />
+				
+				
+				
+				1. <a target="_blank" href="####"/> Assembla - GeneCube </a> <br />
+				2. <a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AspAHhRxtEIwdEM5eU1TQ0NlT0RMM2hpOEowWFlHdGc#gid=45"/>Project Dashboard</a>
+<br/>
+
+
+
+				
+				</div> 
+			</div> 
+		</li> 
+
+<!--iPad 101-->
+
+		<li>
+			<h3> <a name="1" href="#1">iPAD 101 </a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				<br /> <br />
+				
+				1. <a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/genentech/wiki/iTrain_iPad_101"/> Assembla - iTrain iPad 101 </a> <br />
+				2. <a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AspAHhRxtEIwdHA5N0Nnd2FRUDVIVDJDYXk2Um5OdlE#gid=45"/>Project Dashboard</a>
+<br/>
+
+				
+				</div> 
+			</div> 
+		</li> 
+
+<!--XMLPI-->
+
+		<li>
+			<h3> <a name="1" href="#1">XML PI</a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				<br /> <br />
+				
+				1. <a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AspAHhRxtEIwdG53T0ZNSlpYTXRLVTJaM2dlc3FjdFE#gid=44"/> Project Dashboard - XMLPI </a> <br />
+				2. <a target="_blank" href="http://10.10.16.30:8080//job/BuildGenentechPrescribingInformation/"/>Jenkins </a>
+smuser / Pass123word <br/>
+
+				
+				</div> 
+			</div> 
+		</li> 
+
+		<li>
+			<h3> <a name="1" href="#1">gVault</a>  <span>+</span> </h3> 
+			<div class="collapse"> 
+			<div class="collapse-container">
+				<p>
+
+				<br /> <br />
+				
+				1. <a target="_blank" href="http://gvault-qa.meltdemo.com"/> gVault </a> danielle.eide@meltmedia.com / Abc123 <br />
+
+				
+				</div> 
+			</div> 
+		</li> 
+
+
+
+<!--
+<h4>BioOnc</h4> 
+
+
+-->
+
+
+<!--AVASTIN.com-->
+		
+	<!--	<li>
+				<h3> <a name="1" href="#1">AVASTIN</a>  <span>+</span> </h3> 
+				<div class="collapse"> 
+				<div class="collapse-container">
+				
+					<p>
+					<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/document/d/1OwruAZGdIpA2RkT_uZvO6bEM0Vpw1KC3wDtEeS8a5Dw/edit"/>Agenda/Mtg Notes</a> |
+					<a target="tab" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AtA03fjADQIjdDlfd1FYWlRFU2IyY0FGc2JmaC12Snc#gid=2" /> iDetail Changes</a> |
+					<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/?tab=oo&pli=1#folders/0B8pAHhRxtEIwMzM2YzYzOWUtMTIxMC00NThhLTg5MzYtMDc2YmY3MTU3M2Jj">Schedule</a> | 
+					<a target="tab" href="https://docs.google.com/a/scrollmotion.com/viewer?a=v&pid=explorer&chrome=true&srcid=0B-3RbtmbKYafNjI0NzRjMzMtYTBjYy00ODFlLTg5OWYtNzVmYjQzNzMyNzFk&hl=en_US" >SiteMap</a> | 
+					<br />Production: Jeremy, JamesL
+					<br />Client Call: Thursday @ 12pm EST | 877-468-2134 Code 889694, host: 154095
+					<br />Client: <a href="mailto:wildfire.joe@gene.com">Joe</a> 650-225-6787 | <a href="mailto:dillon.allison@gene.com">Allison Dillon</a> 650.467.2390 | <a href="mailto:dherrera@hs-ideas.com"/>David Hererra</a> 212.822.6381
+					<br/>H&S: <a href="http://webfile.hs-ideas.com/login.asp" target="_blank">FTP</a> avastinpt / avastin01
+					
+					 <br />
+					 <br />iDetail QA : bpter136 / genetest
+\
+					 <br /><a href="https://genentechota.scrollmotion.com/avastin"/>Avastin OTA:</a> avas / Av22.....
+					<br /> IPI: <a href="https://docs.google.com/a/scrollmotion.com/leaf?id=0B8pAHhRxtEIwZGFkOTUyODctNGE1NS00ZjdiLTkwMjItNDljNDRjYmExY2Q5&hl=en_US" target="_blank"/>Mock Up</a> |
+					<a href="http://dl.dropbox.com/u/21991974/jquery-ui-1-1/development-bundle/demos/accordion/no-auto-height2.html" target="_blank"/>HTML</a>
+					</p> 
+					
+				</div> 
+				</div> 
+			</li> 
+-->
+<!--HEME-->
+		
+		<!--
+		<li>
+			<h3> <a name="1" href="#1">HEME</a>  <span>+</span> </h3> 
+			<div  class="collapse">
+			<div class="collapse-container">
+				
+					<p>
+
+
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0Am9Nt2NAthazdHVkWDQ1dmlsdzk5bk90OXVqM2JSZ2c#gid=0">Feedback Tracking</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AlVWcSnBNypsdG5hNFhrMmpPdmdEa0JIbGxyWmJyWUE#gid=0">CLL Timeline</a> |
+				<a target="_blank" href="https://trello.com/board/genentech-rituxan-heme/4f79c69313fa511e7a4d0ba1"/>Heme Board - Trello</a> |
+
+				
+					<br />Production: JamesL
+					<br />Client Call: Thursday @ 12pm EST - 888-895-4286 / 815153 
+					<br />Client: <a href="mailto:cheng.katherine@gene.com">Katherine</a> | <a href="mailto:thadani.raj@gene.com">Raj</a> |  <a href="mailto:eapen.stan@gene.com">Sam</a>
+				<br/>
+					
+
+				<br />iDetail QA: bpter049 / genetest
+<br />
+				<a href="https://genentechota.scrollmotion.com/tarceva"/>HEME OTA:</a> ritu / rIH22-----
+				<br /><a target="_blank" href="###">TEST</a> |
+				</p> 
+			
+			</div>
+			</div>
+		</li>
+-->
+
+<!--HERCEPTIN/PERTUZEMAB.com-->
+		
+		<!--
+		<li>
+			<h3> <a name="1" href="#1">HERCP/PRTZ</a>  <span>+</span> </h3> 
+			<div  class="collapse">
+			<div class="collapse-container">
+				
+				<p>
+
+<a target="_blank" href="https://sites.google.com/a/gene.com/herceptin-market-communications-collaboration/">Project Website</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0An5ZZoX_PUhEdDBxSzBLLWE3TjZoTXhaYUQ2T2FWaVE#gid=0">Interagency Status</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AnOeIbC9b0kgdDUtWDBQdW43b2JPV1Brek43WE9lNEE#gid=2">Her2 iDetail Updates</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0Am9Nt2NAthazdGV0NXpsNXFiaDhBMlRQWlNSWkxuNHc#gid=0">Feedback Tracking</a> |
+
+					<br />Production: Melcoy
+					<br />Client Call: Wed @ 1pm - 1-888-442-7245 / 330768 | Thurs @ 1:30pm - 1-888-442-7245 / 330768
+					<br />Client: <a href="mailto:chou.eshirl@gene.com">Eshirl</a> | <a href="mailto:schumacher.jake@gene.com">Jake Schumacher</a>
+
+					<br/>
+					
+
+				<br />iDetail QA: bpter137 / genetest
+<br />
+				<a href="https://genentechota.scrollmotion.com/herceptin"/>Hercptin OTA:</a> herc / He333,,,,,
+				<br />HER Case Builder - <a target="_blank" href="https://docs.google.com/a/scrollmotion.com/file/d/0BwPZQLGs5GzpRE03QmJyRy1TeFc1M092UTdrczNZdw/edit">Case Builder</a> |
+				</p> 
+			
+			</div>
+			</div>
+		</li>
+
+-->
+<!--TARCEVA/ZELBORAF-->
+	
+	<!--	<li>
+			<h3> <a name="1" href="#1">TARC/ZELB</a>  <span>+</span> </h3> 
+			<div  class="collapse">
+			<div class="collapse-container">
+				
+				<p>
+
+
+				<a target="_blank" href="###">TEST</a> |
+				<a target="_blank" href="###">TEST</a> |
+				<a target="_blank" href="###">TEST</a> |
+				
+					<br />Production: JamesL
+					<br />Client Call: Monday @ 2pm | Tuesday @ 4pm | Wed @ 2pm | Friday @ 2pm| Dialin: 213-787-0529, Access code: 637 5088
+					<br />Client:
+
+					<br/>
+					
+
+				<br />iDetail QA: bpter184 / genetest
+<br />
+				<a href="https://genentechota.scrollmotion.com/tarceva"/>Tarceva OTA:</a> tarceva / tA34...,,,
+				<a href="https://genentechota.scrollmotion.com/zelboraf"/>Zelboraf OTA:</a> zelbo / Ze-----22
+				<br /><a target="_blank" href="###">TEST</a> |
+				</p> 
+			
+			</div>
+			</div>
+		</li>
+
+-->
+<!--XELODA-->
+		
+		<!--
+		<li>
+			<h3> <a name="1" href="#1">XELODA</a>  <span>+</span> </h3> 
+			<div  class="collapse">
+			<div class="collapse-container">
+				
+					<p>
+
+
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0Ah15Qfg8_n50dFYxOEJmWXktV3pTOWwzZFVodUhaREE#gid=0">Wishlist Tracker</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0Ah15Qfg8_n50dFYxOEJmWXktV3pTOWwzZFVodUhaREE#gid=0">Omniture Pages Names</a> |
+				
+					<br />Production: 
+					<br />Client Call: 
+					<br />Client: 
+				<br/>
+					
+
+				<br />iDetail QA: bpter359 / genetest
+<br />
+				<a href="https://genentechota.scrollmotion.com/tarceva"/>Xeloda OTA:</a> xelo / Xe,,,,,333 
+				<br /><a target="_blank" href="###">TEST</a> |
+				</p> 
+			
+			</div>
+			</div>
+		</li>
+
+-->
+<!--ERIVDEDGE-->
+	<!--
+		<li>
+			<h3> <a name="1" href="#1">EVRIVEDGE</a>  <span>+</span> </h3> 
+			<div  class="collapse">
+			<div class="collapse-container">
+				
+				<p>
+
+
+				<a target="_blank" href="https://sites.google.com/a/gene.com/vismodegib-interactive-marketing-collaboration/?pli=1">Project Website</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0Aq9THh8VUehDdHVRMEZxSi1uajBFcDg0Vmo1RUNsVnc#gid=10">WorkSheet</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/document/d/1QPkclJFmgREL1aInmKDdmZByr0wb20udcyvQ43-LW9I/edit">Team Contacts</a> |
+
+		
+					<br />Production: Sean, JamesL
+					<br />Client Call: Monday - 212-367-5300 / 443035 | Friday - 877-581-9247 / 931289 / <a href="https://genentech.webex.com/genentech/j.php?ED=175128842&UID=498269407&PW=NM2UwMGRmNGJk&RT=MiM0" target="_blank">WebEx</a> / Mtg # 590 207 113 / Mtg Password
+					<br />Client: <a href="mailto:wildfire.joe@gene.com">Joe</a> 650-225-6787 | <a href="mailto:ahnesorg.peter@gene.com@gene.com">Peter </a> 650.303.3456 
+					<br/>
+					
+
+				<br />iDetail QA: bpter359 / genetest
+<br />
+				<a href="https://genentechota.scrollmotion.com/vismo"/>Erivedge OTA:</a> vismo / vI...,,,22
+				<br />
+				</p> 
+			
+			</div>
+			</div>
+		</li>
+
+<h4>GIO</h4> 
+
+
+	-->
+
+<!--LUCENTIS.com-->
+		
+	<!--
+		<li>
+			<h3> <a name="1" href="#1">LUCENTIS</a>  <span>+</span> </h3> 
+			<div  class="collapse">
+			<div class="collapse-container">
+				
+				<p>
+
+<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key= 0AspAHhRxtEIwdHhnY0k4LU11c01vZlM4dmtldVJYWmc&hl=en_US#gid=0">DR</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/document/d/1kTcKt-509S4UU3lDtmJkkB9MFfDegl1DLD_l6fOn4Z0/edit?hl=en_US">Agendas</a> | 
+
+
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/?tab=oo&pli=1#folders/0Bwdq4u-oegAHNTk1MTFhNjctM2NkNS00YmZhLTg1NWYtODZmMDQ4YzliZmJj">Asset Inventory</a> |
+				<a target="tab" href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AspAHhRxtEIwdDJBRGgwZDlUd0k3aVR1cjljSXpqTVE&hl=en_US#gid=0">Calendar</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/?tab=oo&pli=1#folders/0Bwdq4u-oegAHM2VlZWFkOGMtMTk0MS00NThiLWI4MTAtMTZmOTYzZTJhNDA5">Meeting Minutes</a> |
+				<a target="tab" href="https://docs.google.com/a/scrollmotion.com/viewer?a=v&pid=explorer&chrome=true&srcid=0Bwdq4u-oegAHNjFiMzRlZWUtZGE4My00NThkLWJhY2ItYWUwOTgwNzI4N2Y5&hl=en_US" > ProjectPlan</a> |
+				<a target="_blank" href="https://docs.google.com/a/scrollmotion.com/?tab=oo&pli=1#folders/0Bwdq4u-oegAHNjMyNzZiYTctMGY3ZC00Y2MxLWJkMDktNTFiN2JhZDllMDM5">Schedule</a> |
+				<a target="tab" href="https://docs.google.com/a/scrollmotion.com/?tab=oo&pli=1#folders/0Bwdq4u-oegAHMGFmYzYzZmQtZWZlMS00ZGNlLWIxMmItYTBhNTJjMjA5OWQw">SiteMap</a> | 
+				<br />
+				Production Designer: Chris/Rolando <br />
+				Client Call: Wednesday | 12:30pm | p: 1.888.442.7245 | c: 46729961 <br />
+				Client: <a href="mailto:einstein.aimee@gene.com">Aimee</a> 658.467.6404 | m.915.509.1665 | <a href="mailto:erickson.carl@gene.com">Carl</a> - 203.918.6176 <a href="mailto:EDeClue@cdmworldagency.com"/>Emily</a> - 212.284.7473 <br />
+				<br />Lucentis iDetail: bpter132 / genetest
+<br />
+				<a href="https://genentechota.scrollmotion.com/lucentis"/>Lucetnis OTA:</a> lucen / Lu...333,,,
+				<br />
+				</p> 
+			
+			</div>
+			</div>
+		</li>
+-->
+
+
+
+
+
+</ul>
+
+
+
+</div> <!-- END #content-main -->
+
+<!---------SIDEBAR---------------->
+
+<div id="content-related" class="sidebar">
+
+<h4> 
+<a name="5" target="_blank" href="https://mail.google.com/mail/u/0/?shva=1#inbox"/> <img style="padding:5px" width="30px" heigh="30px" src="http://assets.lifehack.org/wp-content/files/2011/11/gmail-logo-icon.png?4c9b33"/> </a>
+<a name="5" target="_blank" href="https://www.google.com/calendar/b/0/render?tab=cc"/><img style="padding:5px" width="30px" height="30px" src="http://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-Calendar-icon.png"/>
+<a name="5" target="_blank" href="https://docs.google.com/a/scrollmotion.com/#home"/> <img style="padding:5px" width="30px" heigh="30px" src="http://www.stuartford.me.uk/wp-content/uploads/2012/12/Logo_of_Google_Drive.png"/> </a>
+<a name="5" target="_blank" href="https://sites.google.com/a/scrollmotion.com/pharmarepository/home"/> <img style="padding:5px" width="30px" heigh="30px" src="http://csherpasdev.wpengine.com/wp-content/uploads/2012/06/icon-google-sites.png"/> </a>
+
+
+<!--<a name="5" target="_blank" href="https://www.assembla.com/start"/> <img style="padding:5px" width="30px" heigh="30px" src="http://cdn3.droidmill.com/media/market-media/eu.bioport.assembla_icon.png"/> </a>
+<a name="5" target="_blank" href="https://www.manymoon.com/users/main_v3#tab_project"/> <img style="padding:5px" width="30px" heigh="30px" src="http://static.allmyapps.com/data/m/a/manymoon-task-basecamp/icon_48x48_manymoon_icon.png"/> </a> 
+<a name="5" target="_blank" href="https://www.yammer.com/scrollmotion.com/"/> <img style="padding:5px" width="30px" heigh="30px" src="http://www.totango.com/blog/wp-content/uploads/2011/12/YammerLogo.png"/> </a>-->
+
+</h4>
+
+<ul id="vertical" class="side"> 
+	<li> 
+		<h3> <a name="5" href="#5">Assembla</a>  <span>+</span> </h3> 
+		<div class="collapse"> <div class="collapse-container">
+		
+		<p><a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/SM_qa/tickets?tickets_report_id=8&batch=false"/>QA - Tickets</a></p> 
+		<p><a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/iceborg-enterprise-platform-/tickets"/>BORG - Tickets</a></p>
+		<p><a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/ScrollMotionCompanySpace/tickets"/>SM - Tickets</a></p>
+		<p><a target="_blank" href="https://scrollmotioninc.assembla.com/spaces/development-requests/tickets"/>Scope - Tickets</a></p>
+
+		
+		
+		<!--
+		<p><a target="_blank" href="https://www.quickbase.com/db/becmj2v32?a=q&qid=1000192"/>A - My Project Tickets</a></p> 
+		<p><a target="_blank" href="https://www.quickbase.com/db/bfq92cydt"/>QB - Sales Engineers</a></p> 
+		-->
+		
+		</div> </div> 
+	</li>
+
+
+
+	<li> 
+		<h3> <a name="5" href="#5">Production</a>  <span>+</span> </h3> 
+		<div  class="collapse"> <div class="collapse-container">
+		
+		<p><a href="https://sites.google.com/a/scrollmotion.com/home/" target="_blank"/> SM Google Site</a> </p>
+		<p><a href="https://sites.google.com/a/scrollmotion.com/pharmarepository/" target="_blank"/> Pharma Team Repository (PTR) </a> </p>
+		<p><a href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0AonqDZEW8DegdFViVmZnd2psQ0xSbnN3VXhNdnV2dVE"/>Master Change Control Doc</a> </p>
+		<p><a href="https://docs.google.com/a/scrollmotion.com/spreadsheet/ccc?key=0Am9Nt2NAthazdDJKY2JtbGxsczBkd19MLTZwVDVfN1E#gid=1"/>ADIC</a> </p>
+		<p><a target="_blank" href="https://spreadsheets4.google.com/ccc?key=tcDyLlk8KEjZBdmK1peMJNg&authkey=CM2Q7ewL#gid=0"/>QA Sign Off</a> </p>
+		
+		</div> </div> 
+	</li>
+
+	<li> 
+		<h3> <a name="5" href="#5">Analytics</a>  <span>+</span> </h3> 
+		<div  class="collapse"> <div class="collapse-container">
+
+		<p><a href="https://keen.io/organizations/5367dceece5e437a9a000002" target="_blank"/>Keen.io - SM</a> <br />agazapo@scrollmotion.com / s0nic131</p>
+
+
+		<p><a href="http://sc.omniture.com" target="_blank"/>Omniture - Genentech</a> <br />Genentech / scrollmotion / scrollm </p>
+
+		<p><a href="https://tableau.semphonic.com/t/genentech/views/iDetailUpdateReport/iDetailVersionReport " target="_blank"/>Tableau - Semphonic</a> <br />Genentech / GRP1234u </p>
+
+	
+
+	
+	
+		</div> </div> 
+	</li>
+
+
+	<li> 
+		<h3> <a name="5" href="#5">Conference/WebEx Call</a>  <span>+</span> </h3> 
+		<div class="collapse"> <div class="collapse-container">
+		
+		<p> <a target="_blank" href="http://www.uberconference.com/u/297954397"/>UberConferenceCall</a>
+	<br />
+
+		(305) 330-5751 <br />
+		 Your PIN #26646<br/>
+		 </p>
+
+		<p> <a target="_blank" href="https://www.freeconferencecall.com/mediadownload.asp"/>FreeConferenceCall</a>
+	<br />
+			One-touch: (605) 781-1000,,438197#<br />
+ 
+			Host Access Code: 438197* <br />
+		</p>
+		
+		
+		<p>
+		<a target="_blank" href="https://scrollmotion.webex.com"/>http://scrollmotion.webex.com</a><br />
+		Username: rpetrozzo<br />
+		Password: Compete1<br />
+ 
+	
+		</p>
+		
+		<p>
+		<a target="_blank" href="https://scrollmotion.webex.com"/>https://scrollmotion.webex.com</a><br />
+          Username: Scrollmotion-Pharma<br />
+          Password:  Scr0llPh@rmA<br />
+	
+		</p>
+		
+		
+ 
+
+
+		</div> </div> 
+	</li> 
+
+
+
+
+		
+
+	<li> 
+		<h3> <a name="5" href="#5">Internal</a>  <span>+</span> </h3> 
+		<div class="collapse"> <div class="collapse-container">
+	
+		<p><a target="_blank" href="https://confluence.scrollmotion.com/display/ProjMgt/Project+Management"/>PM Confluence Site</a>  </p> 	
+
+	
+	
+	<p><a target="_blank" href="http://testlink.smint.us/smqa/main.php"/>QA Internal Report Site</a> <br /> pm.services / Pmgmt!@#4 </p> 	
+		<p><a target="_blank" href="https://www.intacct.com/ia/acct/frameset.phtml?.sess=NFu6CfFAAIZ4WV-7PMjGekAPhnk."/>Intacct</a></p> 
+		<p><a target="_blank" href="https://officesuite8.broadviewnet.net/webadmin/login/2126089146?LangCode=en">Phone</a></p>
+		<p><a target="_blank" href="https://portal.adp.com/wps/myportal"/>ADP</a></p>
+		<p><a target="_blank" href="https://www.yammer.com/scrollmotion.com/#/Threads/index?type=algo"/>Yammer</a>
+				<p><a target="_blank" href="https://www.hrpassport.com/Link2HR.eng?/Saf/Entry/Signon-form.htm"/>HRpassport</a> 00001365817 / s0nic131 </p>
+				<p><a target="_blank" href="https://surveymonkey.com"/>Survey Monkey SM</a> scrollmotion / scr0ll456 </p>
+
+
+		
+		</div> </div> 
+	</li> 
+
+</ul>
+
+
+</div></div> <!-- END #content-related -->
+
+
+</div> <!-- END #content --> <div id="footer">
+
+		
+			<p style="color:#ffffff;"/>Last updated:  
+			
+<!--DATE-->
+<script type="text/javascript">
+<!--
+var currentTime = new Date()
+var month = currentTime.getMonth() + 1
+var day = currentTime.getDate()
+var year = currentTime.getFullYear()
+document.write(month + "/" + day + "/" + year)
+//-->
+</script>
+<!--TIME-->
+<script type="text/javascript">
+<!--
+var currentTime = new Date()
+var hours = currentTime.getHours()
+var minutes = currentTime.getMinutes()
+if (minutes < 10){
+minutes = "0" + minutes
+}
+document.write(hours + ":" + minutes + " ")
+if(hours > 11){
+document.write("PM")
+} else {
+document.write("AM")
+}
+//-->
+</script>
+			
+			
+			</p>
+		</div>
+		<!-- END #footer -->
+	</div>
+	<!-- END #container -->
+	</body>
+
+
+</html>
+
+
